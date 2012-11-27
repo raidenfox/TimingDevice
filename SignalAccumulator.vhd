@@ -29,26 +29,25 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity SignalAccumulator24 is
-    GENERIC(N: Integer := 24);
-    Port ( en : in STD_LOGIC ;
-			  reset : in STD_LOGIC ;
-			  sig_high24 : in  STD_LOGIC;
-			  second_out24 : out integer;
-           counted24 : out  STD_LOGIC);
-end SignalAccumulator24;
+entity SignalAccumulator is
+    GENERIC(N: Integer := 60);
+    Port ( en : in  STD_LOGIC;
+           reset : in  STD_LOGIC;
+			  sig_high : in  STD_LOGIC;
+			  second_out : out integer;
+           counted : out  STD_LOGIC);
+end SignalAccumulator;
 
-architecture Behavioral of SignalAccumulator24 is
+architecture Behavioral of SignalAccumulator is
     signal counter : Integer := 0;
 	 signal count : Integer := 0;
 	 signal h : STD_LOGIC := '0';
 begin
-counted24 <= not(en or reset) and h;
-process(sig_high24)
+counted <= not(en or reset) and h;
+process(sig_high)
 begin
-
-second_out24 <= count;
-if rising_edge(sig_high24) then counter <= counter +1;
+second_out <= count;
+if rising_edge(sig_high) then counter <= counter +1;
 	count <= count + 1;
 	if count = N-1 then
 	count <= 0;
@@ -62,3 +61,4 @@ if rising_edge(sig_high24) then counter <= counter +1;
 end if;
 end process;
 end Behavioral;
+

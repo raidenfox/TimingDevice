@@ -55,20 +55,13 @@ architecture Behavioral of ClockEnd is
     END COMPONENT;
 	 
 	 COMPONENT SignalAccumulator is
+    GENERIC(N: Integer := 60);
     Port ( en : in  STD_LOGIC;
            reset : in  STD_LOGIC;
 			  sig_high : in  STD_LOGIC;
 			  second_out : out integer;
            counted : out  STD_LOGIC);
 	 END COMPONENT SignalAccumulator;
-	 
-	 COMPONENT SignalAccumulator24 is
-    Port ( en : in  STD_LOGIC;
-           reset : in  STD_LOGIC;
-			  sig_high24 : in  STD_LOGIC;
-			  second_out24 : out integer;
-           counted24 : out  STD_LOGIC);
-	 END COMPONENT SignalAccumulator24;
 	 
 	 COMPONENT DigitCoder is
     Port ( num_in : in  Integer;
@@ -87,7 +80,7 @@ min_out <= mins;
 sec_out <= sec;
 S: SecondsCounter port map(en,rst,comm(3),sec,comm(2));
 M: SignalAccumulator port map(en,rst,comm(2),mins,comm(1));	
-H: SignalAccumulator24 port map(en,rst,comm(1),hours,comm(0));	
+H: SignalAccumulator generic map (24) port map(en,rst,comm(1),hours,comm(0));	
 
 EN1: DigitCoder port map(mins,minv,minv2);
 EN2: DigitCoder port map(hours,hourv,hourv2);
