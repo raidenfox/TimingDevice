@@ -61,4 +61,3 @@ if rising_edge(sig_high) then counter <= counter +1;
 end if;
 end process;
 end Behavioral;
-

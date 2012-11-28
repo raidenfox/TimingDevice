@@ -2,15 +2,15 @@
 -- Company: 
 -- Engineer:
 --
--- Create Date:   17:05:41 11/20/2012
+-- Create Date:   23:25:52 11/27/2012
 -- Design Name:   
--- Module Name:   C:/Users/Tony Stark/ISE/ClockDevice/HourCounter_TB.vhd
--- Project Name:  ClockDevice
+-- Module Name:   C:/Users/Raidenfox/ISE/DigitalClock/SecondsCounter_TB.vhd
+-- Project Name:  DigitalClock
 -- Target Device:  
 -- Tool versions:  
 -- Description:   
 -- 
--- VHDL Test Bench Created by ISE for module: HourCounter
+-- VHDL Test Bench Created by ISE for module: SecondsCounter
 -- 
 -- Dependencies:
 -- 
@@ -32,32 +32,32 @@ USE ieee.std_logic_1164.ALL;
 -- arithmetic functions with Signed or Unsigned values
 --USE ieee.numeric_std.ALL;
  
-ENTITY HourCounter_TB IS
-END HourCounter_TB;
+ENTITY SecondsCounter_TB IS
+END SecondsCounter_TB;
  
-ARCHITECTURE behavior OF HourCounter_TB IS 
+ARCHITECTURE behavior OF SecondsCounter_TB IS 
  
     -- Component Declaration for the Unit Under Test (UUT)
  
-    COMPONENT HourCounter
+    COMPONENT SecondsCounter
     PORT(
          en : IN  std_logic;
-         rst : IN  std_logic;
+         reset : IN  std_logic;
          clk : IN  std_logic;
-         sig_out : OUT  std_logic;
-         rst_out : OUT  std_logic
+         value_out : OUT  integer;
+         sig_out : OUT  std_logic
         );
     END COMPONENT;
     
 
    --Inputs
    signal en : std_logic := '0';
-   signal rst : std_logic := '0';
+   signal reset : std_logic := '0';
    signal clk : std_logic := '0';
 
  	--Outputs
+   signal value_out : integer;
    signal sig_out : std_logic;
-   signal rst_out : std_logic;
 
    -- Clock period definitions
    constant clk_period : time := 1000000 ns;
@@ -65,12 +65,12 @@ ARCHITECTURE behavior OF HourCounter_TB IS
 BEGIN
  
 	-- Instantiate the Unit Under Test (UUT)
-   uut: HourCounter PORT MAP (
+   uut: SecondsCounter PORT MAP (
           en => en,
-          rst => rst,
+          reset => reset,
           clk => clk,
-          sig_out => sig_out,
-          rst_out => rst_out
+          value_out => value_out,
+          sig_out => sig_out
         );
 
    -- Clock process definitions
@@ -81,5 +81,5 @@ BEGIN
 		clk <= '1';
 		wait for clk_period/2;
    end process;
-
+ 
 END;

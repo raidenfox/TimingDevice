@@ -66,4 +66,3 @@ C1: counterN port map(en,reset,clk,comm);
 C2: SignalAccumulator port map(en,reset,comm,seconds,usig);
 
 end Behavioral;
-

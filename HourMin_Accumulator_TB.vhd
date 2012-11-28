@@ -2,15 +2,15 @@
 -- Company: 
 -- Engineer:
 --
--- Create Date:   14:27:27 11/20/2012
+-- Create Date:   23:56:49 11/27/2012
 -- Design Name:   
--- Module Name:   C:/Users/Tony Stark/ISE/ClockDevice/SignalAccumulator_TB.vhd
--- Project Name:  ClockDevice
+-- Module Name:   C:/Users/Raidenfox/ISE/DigitalClock/HourMin_Accumulator_TB.vhd
+-- Project Name:  DigitalClock
 -- Target Device:  
 -- Tool versions:  
 -- Description:   
 -- 
--- VHDL Test Bench Created by ISE for module: SignalAccumulator
+-- VHDL Test Bench Created by ISE for module: HourMin_Accumulator
 -- 
 -- Dependencies:
 -- 
@@ -32,50 +32,59 @@ USE ieee.std_logic_1164.ALL;
 -- arithmetic functions with Signed or Unsigned values
 --USE ieee.numeric_std.ALL;
  
-ENTITY SignalAccumulator_TB IS
-END SignalAccumulator_TB;
+ENTITY HourMin_Accumulator_TB IS
+END HourMin_Accumulator_TB;
  
-ARCHITECTURE behavior OF SignalAccumulator_TB IS 
+ARCHITECTURE behavior OF HourMin_Accumulator_TB IS 
  
     -- Component Declaration for the Unit Under Test (UUT)
  
-    COMPONENT SignalAccumulator
+    COMPONENT HourMin_Accumulator
     PORT(
-         sig_high : IN  std_logic;
-			  vout : out Integer;
-         counted : OUT  std_logic
+         en : IN  std_logic;
+         reset : IN  std_logic;
+         sig_in : IN  std_logic;
+         o1 : OUT  std_logic_vector(3 downto 0);
+         o2 : OUT  std_logic_vector(3 downto 0);
+         sig_out : OUT  std_logic
         );
     END COMPONENT;
     
 
    --Inputs
-   signal sig_high : std_logic := '0';
+   signal en : std_logic := '0';
+   signal reset : std_logic := '0';
+   signal sig_in : std_logic := '0';
 
  	--Outputs
-   signal counted : std_logic;
-   signal vout : Integer;
+   signal o1 : std_logic_vector(3 downto 0);
+   signal o2 : std_logic_vector(3 downto 0);
+   signal sig_out : std_logic;
    -- No clocks detected in port list. Replace <clock> below with 
    -- appropriate port name 
  
-   constant sig_high_period : time := 10 ns;
+   constant clock_period : time := 10 ns;
  
 BEGIN
  
 	-- Instantiate the Unit Under Test (UUT)
-   uut: SignalAccumulator PORT MAP (
-          sig_high => sig_high,
-          vout => vout,
-          counted => counted
+   uut: HourMin_Accumulator PORT MAP (
+          en => en,
+          reset => reset,
+          sig_in => sig_in,
+          o1 => o1,
+          o2 => o2,
+          sig_out => sig_out
         );
 
    -- Clock process definitions
-   sig_high_process :process
+   clock_process :process
    begin
-		sig_high  <= '0';
-		wait for sig_high_period/2;
-		sig_high  <= '1';
-		wait for sig_high_period/2;
+		sig_in <= '0';
+		wait for clock_period/2;
+		sig_in <= '1';
+		wait for clock_period/2;
    end process;
- 
+
 
 END;

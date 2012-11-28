@@ -2,15 +2,15 @@
 -- Company: 
 -- Engineer:
 --
--- Create Date:   22:37:00 11/20/2012
+-- Create Date:   00:18:39 11/28/2012
 -- Design Name:   
--- Module Name:   C:/Users/Tony Stark/ISE/ClockDevice/ClockEnd_TB.vhd
--- Project Name:  ClockDevice
+-- Module Name:   C:/Users/Raidenfox/ISE/DigitalClock/Clock_TB.vhd
+-- Project Name:  DigitalClock
 -- Target Device:  
 -- Tool versions:  
 -- Description:   
 -- 
--- VHDL Test Bench Created by ISE for module: ClockEnd
+-- VHDL Test Bench Created by ISE for module: Clock
 -- 
 -- Dependencies:
 -- 
@@ -32,42 +32,38 @@ USE ieee.std_logic_1164.ALL;
 -- arithmetic functions with Signed or Unsigned values
 --USE ieee.numeric_std.ALL;
  
-ENTITY ClockEnd_TB IS
-END ClockEnd_TB;
+ENTITY Clock_TB IS
+END Clock_TB;
  
-ARCHITECTURE behavior OF ClockEnd_TB IS 
+ARCHITECTURE behavior OF Clock_TB IS 
  
     -- Component Declaration for the Unit Under Test (UUT)
  
-    COMPONENT ClockEnd
+    COMPONENT Clock
     PORT(
          en : IN  std_logic;
+         reset : IN  std_logic;
          clk : IN  std_logic;
-         rst : IN  std_logic;
-           hour_out : out  integer;
-           min_out : out  integer;
-			  sec_out : OUT  integer;
-			  minv: out STD_LOGIC_VECTOR (7 downto 0);
-			  minv2: out STD_LOGIC_VECTOR (7 downto 0);
-			  hourv: out STD_LOGIC_VECTOR (7 downto 0);
-			  hourv2: out STD_LOGIC_VECTOR (7 downto 0)
+         out1 : OUT  std_logic_vector(3 downto 0);
+         out2 : OUT  std_logic_vector(3 downto 0);
+         out4 : OUT  std_logic_vector(3 downto 0);
+         out5 : OUT  std_logic_vector(3 downto 0);
+         out3 : OUT  std_logic
         );
     END COMPONENT;
     
 
    --Inputs
    signal en : std_logic := '0';
+   signal reset : std_logic := '0';
    signal clk : std_logic := '0';
-   signal rst : std_logic := '0';
 
  	--Outputs
-   signal hour_out : integer;
-   signal min_out : integer;
-   signal sec_out : integer;
-	signal minv:  STD_LOGIC_VECTOR (7 downto 0);
-	signal minv2:  STD_LOGIC_VECTOR (7 downto 0);
-	signal hourv:  STD_LOGIC_VECTOR (7 downto 0);
-	signal hourv2:  STD_LOGIC_VECTOR (7 downto 0);
+   signal out1 : std_logic_vector(3 downto 0);
+   signal out2 : std_logic_vector(3 downto 0);
+   signal out4 : std_logic_vector(3 downto 0);
+   signal out5 : std_logic_vector(3 downto 0);
+   signal out3 : std_logic;
 
    -- Clock period definitions
    constant clk_period : time := 1000000 ns;
@@ -75,17 +71,15 @@ ARCHITECTURE behavior OF ClockEnd_TB IS
 BEGIN
  
 	-- Instantiate the Unit Under Test (UUT)
-   uut: ClockEnd PORT MAP (
+   uut: Clock PORT MAP (
           en => en,
+          reset => reset,
           clk => clk,
-          rst => rst,
-          hour_out => hour_out,
-          min_out => min_out,
-          sec_out => sec_out,
-          minv => minv,
-          minv2 => minv2,
-          hourv => hourv,
-          hourv2 => hourv2
+          out1 => out1,
+          out2 => out2,
+          out4 => out4,
+          out5 => out5,
+          out3 => out3
         );
 
    -- Clock process definitions
@@ -97,5 +91,7 @@ BEGIN
 		wait for clk_period/2;
    end process;
  
+
+
 
 END;
