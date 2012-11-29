@@ -2,9 +2,9 @@
 -- Company: 
 -- Engineer: 
 -- 
--- Create Date:    17:15:32 11/19/2012 
+-- Create Date:    09:30:52 11/29/2012 
 -- Design Name: 
--- Module Name:    counterN - Behavioral 
+-- Module Name:    half_adder - Behavioral 
 -- Project Name: 
 -- Target Devices: 
 -- Tool versions: 
@@ -29,35 +29,19 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity counterN is
-    GENERIC(N: Integer := 1000);
-    Port ( en : in  STD_LOGIC;
-           reset : in  STD_LOGIC;
-           clk_in : in  STD_LOGIC;
-           signal_out : out STD_LOGIC);
-end counterN;
+entity half_adder is
+    Port ( s1 : in  STD_LOGIC;
+           s2 : in  STD_LOGIC;
+           r : out  STD_LOGIC;
+           c : out  STD_LOGIC);
+end half_adder;
 
-architecture Behavioral of counterN is
-
-signal counter : integer range 0 to N-1 := 0;
-signal clock_o : std_logic := '0';
+architecture Behavioral of half_adder is
 
 begin
 
-signal_out <= not(en or reset) and clock_o;
-clock_divider: process(clk_in)
-begin
-
-if rising_edge(clk_in) then 
-	if counter < N-1 then
-		counter <= counter + 1;
-		clock_o <= '0';
-	elsif counter = N-1 then
-		clock_o <= '1';
-		counter <= 0;
-	end if;
-end if;
-
-end process;
+r <= s1 xor s2;
+c <= s1 and s2;
 
 end Behavioral;
+
