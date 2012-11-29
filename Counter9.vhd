@@ -85,7 +85,7 @@ counter <= counter+1;
 					incremento4 <= "0001";
 					minuto2 <= ris4;
 					if ris4 <= N2 then
-					minuto2 <= "1111";
+					minuto2 <= "0000";
 					retroazione <= "0000";
 				
 	end if;
